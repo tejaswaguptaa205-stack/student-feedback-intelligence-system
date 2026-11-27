@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SFIS — Student Feedback Intelligence System | Presentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #244A73;
+    --navy-light: #2d5a8e;
+    --charcoal: #20242B;
+    --grey-text: #697386;
+    --bg-light: #F7F8FA;
+    --border: #E5E7EB;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--charcoal);
+    background: #f0f2f5;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── SCREEN LAYOUT ── */
+  .cover-page {
+    background: var(--navy);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 100px;
+    page-break-after: always;
+  }
+  .cover-page .tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+  .cover-page h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: white;
+  }
+  .cover-page .subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    max-width: 580px;
+    margin-bottom: 60px;
+    line-height: 1.7;
+  }
+  .cover-page .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 540px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 32px;
+  }
+  .cover-page .meta-item label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .cover-page .meta-item span {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+  }
+
+  /* ── SLIDE ── */
+  .slide {
+    background: white;
+    max-width: 960px;
+    margin: 32px auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    page-break-after: always;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .slide-header {
+    background: var(--navy);
+    color: white;
+    padding: 22px 40px 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .slide-header .slide-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+  }
+  .slide-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+  }
+  .slide-header .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .slide-body {
+    padding: 32px 40px;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; margin-top: 22px; }
+  h3:first-child { margin-top: 0; }
+  p { margin-bottom: 10px; color: var(--charcoal); }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; }
+  li { margin-bottom: 5px; color: var(--charcoal); }
+  li strong { color: var(--navy); }
+
+  /* ── TABLES ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12.5px; }
+  th {
+    background: var(--bg-light);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  td {
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--charcoal);
+  }
+  tr:nth-child(even) td { background: var(--bg-light); }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    background: var(--bg-light);
+    border-left: 3px solid var(--navy);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 3px 3px 0;
+    font-size: 12.5px;
+  }
+  .callout.green { border-left-color: var(--green); }
+  .callout.amber { border-left-color: var(--amber); }
+  .callout.red { border-left-color: var(--red); }
+  .callout strong { color: var(--navy); }
+  .callout.green strong { color: var(--green); }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 2px;
+  }
+  .badge-critical { background: #FEE2E2; color: #991B1B; }
+  .badge-high { background: #FFEDD5; color: #92400E; }
+  .badge-medium { background: #FEF9C3; color: #713F12; }
+  .badge-low { background: #DCFCE7; color: #166534; }
+  .badge-negative { background: #FEE2E2; color: #991B1B; }
+  .badge-positive { background: #DCFCE7; color: #166534; }
+  .badge-neutral { background: #F3F4F6; color: #374151; }
+  .badge-navy { background: #EFF6FF; color: var(--navy); }
+
+  /* ── TWO COLUMN GRID ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+  .kpi-card {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    background: white;
+  }
+  .kpi-card .kpi-label { font-size: 10.5px; color: var(--grey-text); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .kpi-card .kpi-value { font-size: 26px; font-weight: 800; color: var(--navy); line-height: 1; }
+  .kpi-card .kpi-sub { font-size: 11px; color: var(--grey-text); margin-top: 4px; }
+
+  /* ── STEP LIST ── */
+  .step-list { list-style: none; padding: 0; }
+  .step-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    min-width: 24px;
+    height: 24px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-content strong { color: var(--charcoal); font-weight: 600; }
+  .step-content span { color: var(--grey-text); font-size: 12px; display: block; }
+
+  /* ── FLOWCHART TEXT ── */
+  .flow-box {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--navy);
+    text-align: center;
+    margin: 6px 0;
+  }
+  .flow-arrow { text-align: center; color: var(--grey-text); font-size: 16px; margin: 2px 0; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--grey-text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CHECK / CROSS ── */
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: #9CA3AF; }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: #1e2330;
+    color: #a8d8a8;
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    padding: 16px 20px;
+    border-radius: 3px;
+    line-height: 1.7;
+    margin: 12px 0;
+  }
+
+  /* ── APPENDIX HEADER ── */
+  .appendix-banner {
+    background: #374151;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    max-width: 960px;
+    margin: 40px auto 0;
+    border-radius: 4px 4px 0 0;
+  }
+  .appendix-banner h2 { font-size: 18px; font-weight: 700; }
+  .appendix-banner p { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 4px; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .slide { margin: 0; border: none; border-radius: 0; box-shadow: none; page-break-after: always; }
+    .cover-page { page-break-after: always; min-height: auto; padding: 60px 80px; }
+    .appendix-banner { border-radius: 0; }
+    .no-print { display: none; }
+  }
+
+  /* ── PRINT BUTTON ── */
+  .print-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 12px rgba(36,74,115,0.4);
+    z-index: 999;
+  }
+  .print-btn:hover { background: var(--navy-light); }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 Save as PDF</button>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  COVER PAGE                                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="cover-page">
+  <div class="tag">Academic Project Presentation</div>
+  <h1>Student Feedback<br>Intelligence System</h1>
+  <p class="subtitle">An edge-based NLP platform for automated classification, sentiment analysis, and priority management of student feedback in educational institutions.</p>
+  <div class="meta-grid">
+    <div class="meta-item"><label>Project Name</label><span>SFIS — Student Feedback Intelligence System</span></div>
+    <div class="meta-item"><label>Domain</label><span>NLP · Edge AI · Educational Tech</span></div>
+    <div class="meta-item"><label>Presented By</label><span>[Your Name / Team]</span></div>
+    <div class="meta-item"><label>Date</label><span>October 2026</span></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 1 — PROBLEM STATEMENT                    -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 01</div>
+      <h2>Problem Statement</h2>
+    </div>
+    <div class="section-tag">Introduction</div>
+  </div>
+  <div class="slide-body">
+    <p>Universities collect thousands of feedback entries per semester. Without an automated system, critical student complaints get buried, ignored, or addressed too late.</p>
+
+    <h3>Key Pain Points in Traditional Feedback Systems</h3>
+    <ul>
+      <li><strong>No automatic classification</strong> — every entry must be manually read and routed to the right department</li>
+      <li><strong>Subjective urgency assessment</strong> — severity is judged inconsistently across different staff members</li>
+      <li><strong>Delayed escalation</strong> — critical safety issues may sit unresolved for days before reaching the right person</li>
+      <li><strong>No trend visibility</strong> — institutions cannot see whether complaints about a specific category are increasing</li>
+      <li><strong>Data silos</strong> — feedback stored in spreadsheets cannot be searched, filtered, or reported on efficiently</li>
+      <li><strong>Low student trust</strong> — when feedback visibly produces no action, future submission rates drop sharply</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Core Problem:</strong> Institutions lack the infrastructure to efficiently listen to students at scale. The volume of feedback exceeds human capacity to review, prioritize, and act on each item in time.
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 2 — OBJECTIVES                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 02</div>
+      <h2>Project Objectives</h2>
+    </div>
+    <div class="section-tag">Introduction</div>
+  </div>
+  <div class="slide-body">
+    <p>The Student Feedback Intelligence System (SFIS) is designed to automate the full feedback lifecycle — from submission to resolution — using on-device NLP.</p>
+
+    <table>
+      <thead><tr><th>#</th><th>Objective</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Automatically classify feedback into 8 predefined categories</td><td>Instant routing without manual reading</td></tr>
+        <tr><td>2</td><td>Perform sentiment analysis (Positive / Neutral / Negative)</td><td>Understand tone distribution across departments</td></tr>
+        <tr><td>3</td><td>Estimate issue priority independent of sentiment</td><td>Safety-critical items escalated regardless of wording</td></tr>
+        <tr><td>4</td><td>Run all inference at the edge — no cloud dependency</td><td>Zero data leakage, offline capability, no API cost</td></tr>
+        <tr><td>5</td><td>Provide a management dashboard for review and resolution</td><td>Staff can act on feedback in a structured workflow</td></tr>
+        <tr><td>6</td><td>Enable human-in-the-loop correction with audit trail</td><td>AI recommendations are reviewable, not final verdicts</td></tr>
+        <tr><td>7</td><td>Deliver exportable analytics and category-level insights</td><td>Institution-level reporting for decision makers</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 3 — SYSTEM ARCHITECTURE                  -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 03</div>
+      <h2>System Architecture Overview</h2>
+    </div>
+    <div class="section-tag">Architecture</div>
+  </div>
+  <div class="slide-body">
+    <p>SFIS is built on a three-layer architecture where all inference occurs locally on the device — no data is sent to external servers.</p>
+
+    <div class="two-col">
+      <div>
+        <h3>Architecture Layers</h3>
+        <div class="flow-box" style="background:#EFF6FF; border-color:#244A73; color:#244A73; font-weight:700;">Layer 1 — Student Submission</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box" style="background:#FFF7ED; border-color:#d97706; color:#92400E;">Web Form → Validation → Character Counter → Preset Samples</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box" style="background:#EFF6FF; border-color:#244A73; color:#244A73; font-weight:700;">Layer 2 — Edge NLP Processing</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Category Classification → Sentiment → Priority → Keywords → Summary</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box" style="background:#EFF6FF; border-color:#244A73; color:#244A73; font-weight:700;">Layer 3 — Management & Analytics</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Dashboard · Explorer · Escalation · Reports · Model Evaluation</div>
+      </div>
+      <div>
+        <h3>Design Principles</h3>
+        <ul class="step-list">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>Edge-first</strong><span>All inference runs on-device. No external API calls.</span></div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>Modular NLP</strong><span>Single swappable engine module — upgrade to ONNX without changing other code.</span></div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>Human-in-the-Loop</strong><span>AI recommendations require staff confirmation before closure.</span></div>
+          </li>
+          <li>
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>Privacy by Design</strong><span>Anonymous submissions strip identity before storage.</span></div>
+          </li>
+          <li>
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>Audit Trail</strong><span>Every human correction is timestamped and logged for model drift detection.</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 4 — TECHNOLOGY STACK                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 04</div>
+      <h2>Technology Stack</h2>
+    </div>
+    <div class="section-tag">Architecture</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <table>
+          <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+          <tbody>
+            <tr><td>UI Framework</td><td>React 18 + TypeScript</td></tr>
+            <tr><td>Styling</td><td>Tailwind CSS (corporate palette)</td></tr>
+            <tr><td>Data Visualization</td><td>Recharts</td></tr>
+            <tr><td>Icon Library</td><td>Lucide React</td></tr>
+            <tr><td>NLP Engine</td><td>On-device rule-based (ONNX-ready)</td></tr>
+            <tr><td>Persistence</td><td>Browser LocalStorage</td></tr>
+            <tr><td>Build Tool</td><td>Vite</td></tr>
+            <tr><td>Server</td><td>Node.js zero-dependency HTTP server</td></tr>
+            <tr><td>Font</td><td>Inter (Google Fonts)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>NLP Engine — Upgrade Path</h3>
+        <p>The current engine is a production-quality keyword-weighted rule system. It exports a single function:</p>
+        <div class="code-block">analyzeFeedbackText(text, category?, options?)<br>→ FeedbackAnalysis</div>
+        <p>This interface can be replaced with a real model without changing any other code in the application:</p>
+        <ul>
+          <li><strong>ONNX Runtime Web</strong> — run DistilBERT or MiniLM in browser</li>
+          <li><strong>TensorFlow.js</strong> — load SavedModel or TFLite</li>
+          <li><strong>Backend API</strong> — replace with HTTP call to FastAPI server</li>
+        </ul>
+        <div class="callout green">
+          <strong>Zero vendor lock-in.</strong> The entire application works without any cloud subscription or external service.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 5 — CATEGORIES                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 05</div>
+      <h2>8 Supported Feedback Categories</h2>
+    </div>
+    <div class="section-tag">NLP Engine</div>
+  </div>
+  <div class="slide-body">
+    <table>
+      <thead><tr><th>Category</th><th>Typical Issues</th><th>Responsible Unit</th></tr></thead>
+      <tbody>
+        <tr><td><strong>🎓 Academic</strong></td><td>Curriculum gaps, teaching pace, syllabus quality, study materials</td><td>Academic Affairs</td></tr>
+        <tr><td><strong>👨‍🏫 Faculty</strong></td><td>Teaching effectiveness, availability, communication, grading fairness</td><td>Department Head</td></tr>
+        <tr><td><strong>🏛️ Infrastructure</strong></td><td>Labs, classrooms, Wi-Fi, electrical faults, projectors, maintenance</td><td>Facilities Management</td></tr>
+        <tr><td><strong>📝 Examination</strong></td><td>Scheduling issues, paper errors, result delays, malpractice reports</td><td>Examination Cell</td></tr>
+        <tr><td><strong>📋 Attendance</strong></td><td>Portal errors, policy disputes, incorrect marking, proxy issues</td><td>Academic Registrar</td></tr>
+        <tr><td><strong>💰 Fees</strong></td><td>Payment failures, scholarship delays, refund requests, receipt issues</td><td>Accounts Office</td></tr>
+        <tr><td><strong>🏠 Hostel</strong></td><td>Maintenance, food quality, water supply, security, cleanliness</td><td>Hostel Administration</td></tr>
+        <tr><td><strong>🏢 Administration</strong></td><td>Document processing, staff response time, policy clarity</td><td>Student Affairs</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>Extensible design:</strong> Additional categories (e.g., Transport, Library, Sports) can be added without restructuring the codebase — only the keyword dictionary and routing rules need updating.
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 6 — NLP PIPELINE                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 06</div>
+      <h2>Automated NLP Analysis Pipeline</h2>
+    </div>
+    <div class="section-tag">NLP Engine</div>
+  </div>
+  <div class="slide-body">
+    <p>Every submitted feedback text passes through an 8-step analysis pipeline entirely on the client device.</p>
+
+    <ul class="step-list">
+      <li><div class="step-num">1</div><div class="step-content"><strong>Text Normalization</strong><span>Lowercase conversion, punctuation removal, stopword filtering, tokenization</span></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><strong>Language Detection</strong><span>Identifies primary language; English-first with extensible language support</span></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><strong>Category Scoring</strong><span>Weighted keyword matching across all 8 category dictionaries → argmax selection</span></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><strong>Sentiment Analysis</strong><span>Positive / Neutral / Negative classification with confidence score</span></div></li>
+      <li><div class="step-num">5</div><div class="step-content"><strong>Priority Estimation</strong><span>Safety signals, urgency keywords, and time sensitivity — independent of sentiment</span></div></li>
+      <li><div class="step-num">6</div><div class="step-content"><strong>Keyword Extraction</strong><span>Top 3–5 content tokens identified as issue indicators</span></div></li>
+      <li><div class="step-num">7</div><div class="step-content"><strong>Summary Generation</strong><span>Concise one-line summary describing the core issue</span></div></li>
+      <li><div class="step-num">8</div><div class="step-content"><strong>Result Storage</strong><span>Full FeedbackAnalysis object saved with processing metadata and timestamps</span></div></li>
+    </ul>
+
+    <div class="callout amber">
+      <strong>Average inference time: ~10–15 ms</strong> per feedback entry on a standard laptop browser — enabling real-time feedback as students type.
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 7 — PRIORITY LOGIC                       -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 07</div>
+      <h2>Safety-Aware Priority Estimation</h2>
+    </div>
+    <div class="section-tag">NLP Engine</div>
+  </div>
+  <div class="slide-body">
+    <div class="callout red">
+      <strong>Key Design Decision:</strong> Priority is computed independently from sentiment. A negative tone does NOT automatically mean high priority — and a neutral tone does NOT mean the issue is unimportant.
+    </div>
+
+    <table>
+      <thead><tr><th>Priority</th><th>Trigger Criteria</th><th>Example</th><th>Response Target</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-critical">CRITICAL</span></td>
+          <td>Physical safety risk, infrastructure failure, health hazard, credible emergency</td>
+          <td>"Electrical panel sparking in Lab 3"</td>
+          <td>Immediate — within 1 hour</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-high">HIGH</span></td>
+          <td>Multi-day unresolved issues, exam disruption, urgent fee deadlines, service outage</td>
+          <td>"Water supply unavailable for 2 days"</td>
+          <td>Same day</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-medium">MEDIUM</span></td>
+          <td>Service degradation, repeated minor complaints, degraded (not absent) service</td>
+          <td>"Wi-Fi is slow in the library"</td>
+          <td>Within 3 days</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-low">LOW</span></td>
+          <td>Suggestions, appreciation, isolated minor observations</td>
+          <td>"Could we get more vending machine options?"</td>
+          <td>Routine queue</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Two-Pass Priority Algorithm</h3>
+    <div class="two-col">
+      <div>
+        <p><strong>Pass 1 — Safety Override</strong><br>Checks for critical indicator keywords (sparking, injury, poisoning, dangerous, hazard). If found → Priority = Critical, regardless of sentiment score.</p>
+      </div>
+      <div>
+        <p><strong>Pass 2 — Urgency Scoring</strong><br>Scores time words (days, urgent, still, deadline), severity amplifiers (completely, never, totally), and unresolved complaint signals to determine High, Medium, or Low.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 8 — APPLICATION OVERVIEW                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 08</div>
+      <h2>Application — 10 Functional Sections</h2>
+    </div>
+    <div class="section-tag">Application</div>
+  </div>
+  <div class="slide-body">
+    <p>SFIS is organized into 10 purpose-built sections accessible from a fixed left sidebar. Each section has a distinct operational purpose.</p>
+
+    <table>
+      <thead><tr><th>#</th><th>Section</th><th>Primary Purpose</th><th>Key Features</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Overview Dashboard</strong></td><td>Operational snapshot</td><td>6 KPI cards, 4 charts, escalation queue, edge stream</td></tr>
+        <tr><td>2</td><td><strong>Submit Feedback</strong></td><td>Student submission</td><td>5 presets, anonymous mode, real-time NLP result</td></tr>
+        <tr><td>3</td><td><strong>Feedback Explorer</strong></td><td>Data management</td><td>Table, 7 filters, sort, search, CSV export</td></tr>
+        <tr><td>4</td><td><strong>AI Analysis Workbench</strong></td><td>Prediction inspection</td><td>Activation chart, token weights, agreement stats</td></tr>
+        <tr><td>5</td><td><strong>Priority & Escalations</strong></td><td>Queue management</td><td>4 priority queues, cluster view, rapid resolve</td></tr>
+        <tr><td>6</td><td><strong>Analytics & Reports</strong></td><td>Executive reporting</td><td>5 report types, category matrix, print to PDF</td></tr>
+        <tr><td>7</td><td><strong>Category Insights</strong></td><td>Per-discipline drill-down</td><td>8 selectors, sentiment donut, keyword tags</td></tr>
+        <tr><td>8</td><td><strong>Edge AI Monitor</strong></td><td>Device telemetry</td><td>Latency, memory, benchmark profiler, event log</td></tr>
+        <tr><td>9</td><td><strong>Model Evaluation</strong></td><td>Quality tracking</td><td>8×8 confusion matrix, per-class F1, misclassifications</td></tr>
+        <tr><td>10</td><td><strong>Settings</strong></td><td>Configuration</td><td>SLA hours, escalation rules, category management</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 9 — OVERVIEW DASHBOARD                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 09</div>
+      <h2>Overview Dashboard</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <p>The dashboard answers six operational questions instantly, without requiring navigation into sub-pages.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Total Feedback</div><div class="kpi-value" style="color:#244A73">1,284</div><div class="kpi-sub">+12% vs. last month</div></div>
+      <div class="kpi-card"><div class="kpi-label">Analyzed</div><div class="kpi-value" style="color:#16a34a">1,271</div><div class="kpi-sub">99.0% coverage</div></div>
+      <div class="kpi-card"><div class="kpi-label">Negative Feedback</div><div class="kpi-value" style="color:#dc2626">34%</div><div class="kpi-sub">+5% vs. last month</div></div>
+      <div class="kpi-card"><div class="kpi-label">High Priority</div><div class="kpi-value" style="color:#d97706">87</div><div class="kpi-sub">Requires expedited review</div></div>
+      <div class="kpi-card"><div class="kpi-label">Unresolved</div><div class="kpi-value" style="color:#dc2626">213</div><div class="kpi-sub">16.6% resolution gap</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg Resolution</div><div class="kpi-value" style="color:#244A73">2.4d</div><div class="kpi-sub">SLA target: 3 days</div></div>
+    </div>
+
+    <h3>Dashboard Visualizations</h3>
+    <ul>
+      <li><strong>Sentiment Donut Chart</strong> — Positive / Neutral / Negative distribution across all feedback</li>
+      <li><strong>Volume Over Time</strong> — Area chart showing weekly feedback submission trends</li>
+      <li><strong>Category Distribution</strong> — Stacked bar chart showing issue volume per department</li>
+      <li><strong>Escalation Queue</strong> — Live list of Critical and High priority unresolved items</li>
+      <li><strong>Edge Event Stream</strong> — Real-time log of recent NLP processing activity</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 10 — SUBMIT FEEDBACK                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 10</div>
+      <h2>Student Feedback Submission</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>Form Features</h3>
+        <ul>
+          <li>Feedback text area with live character counter</li>
+          <li>Optional department and category selection</li>
+          <li>Submission type: Complaint, Suggestion, Appreciation, General</li>
+          <li>Anonymous submission toggle (identity stripped before storage)</li>
+          <li>Optional student reference ID</li>
+          <li>5 preset sample buttons for demonstration</li>
+          <li>Input validation with clear error messages</li>
+          <li>Duplicate submission detection</li>
+        </ul>
+        <div class="callout">
+          <strong>Privacy:</strong> No login required. Anonymous mode strips all student identifiers before the feedback is saved to storage.
+        </div>
+      </div>
+      <div>
+        <h3>Instant NLP Result Card</h3>
+        <p>Immediately after submission, the analysis result appears showing:</p>
+        <table>
+          <tbody>
+            <tr><td><strong>Category</strong></td><td><span class="badge badge-navy">Hostel</span></td></tr>
+            <tr><td><strong>Sentiment</strong></td><td><span class="badge badge-negative">Negative</span></td></tr>
+            <tr><td><strong>Priority</strong></td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Keywords</strong></td><td>water supply, administration, unresolved</td></tr>
+            <tr><td><strong>Summary</strong></td><td>Hostel water supply unavailable for 2 days without response</td></tr>
+            <tr><td><strong>Latency</strong></td><td>~12 ms (on-device)</td></tr>
+          </tbody>
+        </table>
+        <p style="color:var(--grey-text); font-size:12px;">This result is generated in real time by the edge NLP engine — no server round-trip required.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 11 — FEEDBACK EXPLORER                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 11</div>
+      <h2>Feedback Explorer</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <h3>Data Table</h3>
+    <p>All submitted feedback is displayed in a structured table with sortable columns, filters, and pagination.</p>
+
+    <table>
+      <thead><tr><th>ID</th><th>Preview</th><th>Category</th><th>Sentiment</th><th>Priority</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>FB-001</td><td>Hostel water supply unavailable...</td><td><span class="badge badge-navy">Hostel</span></td><td><span class="badge badge-negative">Negative</span></td><td><span class="badge badge-high">High</span></td><td>Open</td></tr>
+        <tr><td>FB-002</td><td>Professor explained concepts clearly...</td><td><span class="badge badge-navy">Faculty</span></td><td><span class="badge badge-positive">Positive</span></td><td><span class="badge badge-low">Low</span></td><td>Resolved</td></tr>
+        <tr><td>FB-003</td><td>Electrical panel sparking in Lab 3...</td><td><span class="badge badge-navy">Infrastructure</span></td><td><span class="badge badge-negative">Negative</span></td><td><span class="badge badge-critical">Critical</span></td><td>Escalated</td></tr>
+      </tbody>
+    </table>
+
+    <div class="two-col">
+      <div>
+        <h3>Filters Available</h3>
+        <ul>
+          <li>Category (multi-select)</li>
+          <li>Sentiment</li>
+          <li>Priority level</li>
+          <li>Department</li>
+          <li>Date range picker</li>
+          <li>Resolution status</li>
+          <li>Assigned team</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Detail Drawer — 4 Tabs</h3>
+        <ul>
+          <li><strong>AI Analysis</strong> — full prediction breakdown with confidence</li>
+          <li><strong>Human Review</strong> — confirm/correct AI, assign team, change status</li>
+          <li><strong>Internal Notes</strong> — staff communication thread</li>
+          <li><strong>Lifecycle Audit</strong> — timestamped history of all changes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 12 — HUMAN REVIEW WORKFLOW               -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 12</div>
+      <h2>Human-in-the-Loop Review Workflow</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <div class="callout amber">
+      <strong>Core Principle:</strong> AI predictions are recommendations — not final verdicts. Every classification decision can be reviewed and corrected by authorized staff.
+    </div>
+
+    <h3>Review Workflow</h3>
+    <div class="flow-box">Staff opens feedback in Feedback Explorer → Detail Drawer opens</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">Staff reviews AI prediction: Category, Sentiment, Priority, Keywords</div>
+    <div class="flow-arrow">↓ Agree or Disagree</div>
+    <div class="two-col">
+      <div>
+        <div class="flow-box" style="background:#DCFCE7; border-color:#16a34a; color:#166534;">Confirm prediction → Mark as reviewed → Assign team → Update status</div>
+      </div>
+      <div>
+        <div class="flow-box" style="background:#FEF9C3; border-color:#d97706; color:#713F12;">Correct category / sentiment / priority → Provide reason → Save correction</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">Correction logged with reviewer ID and timestamp → Feeds into Model Evaluation</div>
+
+    <h3 style="margin-top:16px;">Why This Matters</h3>
+    <ul>
+      <li>Maintains accountability — every decision has an owner</li>
+      <li>Builds a correction dataset for model retraining</li>
+      <li>Prevents automatic closure of Critical issues without human sign-off</li>
+      <li>Provides a full audit trail for institutional compliance</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 13 — ANALYTICS & REPORTS                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 13</div>
+      <h2>Analytics & Reports</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>Report Types</h3>
+        <ul>
+          <li><strong>Executive Summary</strong> — overall system health for leadership</li>
+          <li><strong>Category Performance</strong> — per-discipline complaint volume and resolution rate</li>
+          <li><strong>Sentiment Trend</strong> — positive/negative ratio over selected date range</li>
+          <li><strong>Priority & Resolution</strong> — SLA compliance tracking by team</li>
+          <li><strong>Feedback Volume</strong> — submission patterns and peak periods</li>
+        </ul>
+        <h3>Export Options</h3>
+        <ul>
+          <li>CSV download of filtered feedback records</li>
+          <li>Print to PDF via browser print dialog</li>
+          <li>On-screen formatted report view</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Category Performance Matrix</h3>
+        <table>
+          <thead><tr><th>Category</th><th>Volume</th><th>Neg %</th><th>Resolved %</th></tr></thead>
+          <tbody>
+            <tr><td>Infrastructure</td><td>218</td><td>62%</td><td>71%</td></tr>
+            <tr><td>Faculty</td><td>195</td><td>28%</td><td>85%</td></tr>
+            <tr><td>Academic</td><td>174</td><td>41%</td><td>79%</td></tr>
+            <tr><td>Hostel</td><td>162</td><td>55%</td><td>68%</td></tr>
+            <tr><td>Fees</td><td>148</td><td>38%</td><td>82%</td></tr>
+            <tr><td>Examination</td><td>137</td><td>45%</td><td>74%</td></tr>
+            <tr><td>Attendance</td><td>128</td><td>33%</td><td>88%</td></tr>
+            <tr><td>Administration</td><td>122</td><td>52%</td><td>65%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 14 — EDGE AI MONITOR                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 14</div>
+      <h2>Edge AI Monitor</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>Device Telemetry</h3>
+        <ul>
+          <li>Processing mode: CPU / WebGL / WASM accelerator</li>
+          <li>Model version and last update timestamp</li>
+          <li>Average inference latency (ms)</li>
+          <li>P95 and P99 latency percentiles</li>
+          <li>Estimated memory usage</li>
+          <li>Total inferences processed this session</li>
+          <li>Benchmark profiler — runs latency test across N samples</li>
+          <li>Event log — scrolling stream of processing activity</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Edge vs Cloud AI</h3>
+        <table>
+          <thead><tr><th>Aspect</th><th>Cloud AI</th><th>SFIS Edge AI</th></tr></thead>
+          <tbody>
+            <tr><td>Data location</td><td>Leaves institution</td><td class="check">Stays on device</td></tr>
+            <tr><td>Internet required</td><td>Yes</td><td class="check">Works offline</td></tr>
+            <tr><td>Cost per inference</td><td>Per API call</td><td class="check">Zero cost</td></tr>
+            <tr><td>Latency</td><td>100ms–2s</td><td class="check">10–15ms</td></tr>
+            <tr><td>FERPA compliance</td><td>Risk</td><td class="check">Compliant by design</td></tr>
+            <tr><td>Vendor dependency</td><td>High</td><td class="check">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 15 — MODEL EVALUATION                    -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 15</div>
+      <h2>Model Evaluation Dashboard</h2>
+    </div>
+    <div class="section-tag">Application Walkthrough</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Overall Accuracy</div><div class="kpi-value">87.3%</div><div class="kpi-sub">Across all 8 categories</div></div>
+      <div class="kpi-card"><div class="kpi-label">Macro Precision</div><div class="kpi-value">84.1%</div><div class="kpi-sub">Unweighted average</div></div>
+      <div class="kpi-card"><div class="kpi-label">Macro F1-Score</div><div class="kpi-value">85.2%</div><div class="kpi-sub">Harmonic mean</div></div>
+      <div class="kpi-card"><div class="kpi-label">Human Agreement</div><div class="kpi-value">91.4%</div><div class="kpi-sub">Staff confirmed AI</div></div>
+      <div class="kpi-card"><div class="kpi-label">Corrections Logged</div><div class="kpi-value">109</div><div class="kpi-sub">For retraining dataset</div></div>
+      <div class="kpi-card"><div class="kpi-label">Model Version</div><div class="kpi-value" style="font-size:18px">v1.2.0</div><div class="kpi-sub">Rule-based (ONNX-ready)</div></div>
+    </div>
+
+    <h3>8×8 Confusion Matrix</h3>
+    <p>An interactive confusion matrix shows exactly which categories are being confused with each other. Clicking a cell reveals the misclassified feedback samples for manual inspection.</p>
+
+    <h3>Per-Category Metrics Table</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Precision</th><th>Recall</th><th>F1</th><th>Support</th></tr></thead>
+      <tbody>
+        <tr><td>Academic</td><td>88%</td><td>84%</td><td>86%</td><td>174</td></tr>
+        <tr><td>Faculty</td><td>91%</td><td>89%</td><td>90%</td><td>195</td></tr>
+        <tr><td>Infrastructure</td><td>85%</td><td>88%</td><td>86%</td><td>218</td></tr>
+        <tr><td>Examination</td><td>83%</td><td>80%</td><td>81%</td><td>137</td></tr>
+        <tr><td>Hostel</td><td>86%</td><td>83%</td><td>84%</td><td>162</td></tr>
+        <tr><td>Fees</td><td>84%</td><td>87%</td><td>85%</td><td>148</td></tr>
+        <tr><td>Attendance</td><td>82%</td><td>79%</td><td>80%</td><td>128</td></tr>
+        <tr><td>Administration</td><td>80%</td><td>82%</td><td>81%</td><td>122</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 16 — LIVE DEMO EXAMPLE                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 16</div>
+      <h2>Live Analysis Example</h2>
+    </div>
+    <div class="section-tag">Demonstration</div>
+  </div>
+  <div class="slide-body">
+    <h3>Input — Student Feedback Text</h3>
+    <div class="callout" style="font-size:14px; font-style:italic; background:#F0F4FF; border-color:#244A73;">
+      "The hostel water supply has been unavailable for two days, and the administration has not responded to our complaints."
+    </div>
+
+    <h3>SFIS Automated Analysis Output</h3>
+    <table>
+      <tbody>
+        <tr><td style="width:180px;"><strong>Predicted Category</strong></td><td><span class="badge badge-navy">Hostel</span> — matched on: hostel, water supply, administration</td></tr>
+        <tr><td><strong>Sentiment</strong></td><td><span class="badge badge-negative">Negative</span> — Detected: not responded, unavailable, complaints</td></tr>
+        <tr><td><strong>Priority</strong></td><td><span class="badge badge-high">High</span> — Multi-day outage, unresolved complaint, basic necessity</td></tr>
+        <tr><td><strong>Keywords</strong></td><td>water supply, administration, unresolved, two days, complaints</td></tr>
+        <tr><td><strong>Summary</strong></td><td>Hostel water supply unavailable for 2 days without administrative response</td></tr>
+        <tr><td><strong>Recommended Action</strong></td><td>Escalate to Hostel Administration immediately. Assign maintenance team.</td></tr>
+        <tr><td><strong>Processing Time</strong></td><td>~12 ms (on-device, no network round-trip)</td></tr>
+        <tr><td><strong>Model Version</strong></td><td>SFIS NLP v1.2.0 — Rule-based keyword scoring</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 17 — KEY DIFFERENTIATORS                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 17</div>
+      <h2>SFIS vs. Generic Feedback Systems</h2>
+    </div>
+    <div class="section-tag">Impact</div>
+  </div>
+  <div class="slide-body">
+    <table>
+      <thead><tr><th>Feature</th><th>Generic Form / Email</th><th>SFIS</th></tr></thead>
+      <tbody>
+        <tr><td>Auto-classification into categories</td><td class="cross">❌ Manual routing</td><td class="check">✅ 8 categories, instant</td></tr>
+        <tr><td>Sentiment analysis</td><td class="cross">❌ Not available</td><td class="check">✅ With confidence score</td></tr>
+        <tr><td>Priority estimation</td><td class="cross">❌ Subjective</td><td class="check">✅ Safety-aware heuristics</td></tr>
+        <tr><td>Edge / on-device inference</td><td class="cross">❌ Cloud or none</td><td class="check">✅ No data leaves device</td></tr>
+        <tr><td>Human review with audit trail</td><td class="cross">❌ No tracking</td><td class="check">✅ Full correction history</td></tr>
+        <tr><td>Escalation management</td><td class="cross">❌ No system</td><td class="check">✅ SLA-aware priority queues</td></tr>
+        <tr><td>Model quality tracking</td><td class="cross">❌ Not applicable</td><td class="check">✅ Confusion matrix + F1 per class</td></tr>
+        <tr><td>Anonymous submissions</td><td class="cross">❌ Requires login</td><td class="check">✅ Identity stripped before storage</td></tr>
+        <tr><td>Category-level analytics</td><td class="cross">❌ Raw data only</td><td class="check">✅ 7 report types + CSV export</td></tr>
+        <tr><td>Repeat issue clustering</td><td class="cross">❌ No grouping</td><td class="check">✅ Cluster view in escalation page</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 18 — LIMITATIONS & FUTURE WORK           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 18</div>
+      <h2>Limitations & Future Roadmap</h2>
+    </div>
+    <div class="section-tag">Evaluation</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>Current Limitations</h3>
+        <ul>
+          <li><strong>Rule-based NLP</strong> — keyword-weighted scoring, not a trained deep learning model; complex paraphrasing may reduce accuracy</li>
+          <li><strong>English-only</strong> — multilingual support (Hindi, regional languages) not yet implemented</li>
+          <li><strong>Browser LocalStorage</strong> — suitable for demo and pilot; requires a real database backend for production scale</li>
+          <li><strong>No real-time notifications</strong> — escalation alerts are in-app only; email/SMS delivery not configured</li>
+          <li><strong>Evaluation data is illustrative</strong> — metrics use labeled demo data, not a real trained model test set</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Future Enhancements</h3>
+        <ul>
+          <li>🔄 <strong>ONNX Transformer Model</strong> — integrate DistilBERT or MiniLM for production NLP accuracy</li>
+          <li>🗄️ <strong>Backend API + Database</strong> — FastAPI + PostgreSQL for institutional scale</li>
+          <li>🌐 <strong>Multilingual Support</strong> — Hindi, regional language classification</li>
+          <li>📧 <strong>Email/SMS Escalations</strong> — automated notification on Critical issues</li>
+          <li>🔐 <strong>Role-Based Access Control</strong> — Admin, Department Head, Staff tiers</li>
+          <li>📱 <strong>Mobile Student App</strong> — dedicated submission interface</li>
+          <li>🤝 <strong>Federated Learning</strong> — cross-institution model improvement without sharing raw data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 19 — CONCLUSION                          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <div>
+      <div class="slide-num">Slide 19</div>
+      <h2>Conclusion</h2>
+    </div>
+    <div class="section-tag">Closing</div>
+  </div>
+  <div class="slide-body">
+    <h3>What SFIS Delivers</h3>
+    <ul>
+      <li>Transforms unstructured student text into structured, actionable institutional intelligence</li>
+      <li>Automates the full feedback lifecycle: submission → NLP analysis → review → escalation → resolution → reporting</li>
+      <li>Runs entirely at the edge — no cloud dependency, no data privacy risk, zero inference cost</li>
+      <li>10 fully functional application sections covering every stakeholder need</li>
+      <li>30+ realistic demo feedback records spanning all 8 categories, all priority levels, and all resolution states</li>
+      <li>Human-in-the-loop design ensures AI augments, not replaces, administrator judgment</li>
+      <li>Modular architecture allows easy upgrade to production-grade ML models without application changes</li>
+    </ul>
+
+    <div class="callout" style="margin-top:20px; text-align:center; font-size:14px; padding:20px;">
+      <em>"Efficient listening is the foundation of institutional improvement. SFIS makes that possible at scale."</em>
+    </div>
+
+    <h3>Applicability</h3>
+    <p>SFIS is directly deployable for:</p>
+    <div class="three-col" style="margin-top:8px;">
+      <div class="callout green" style="text-align:center;"><strong>Universities</strong><br><span style="font-size:11px;">Student affairs, department management</span></div>
+      <div class="callout" style="text-align:center;"><strong>Colleges</strong><br><span style="font-size:11px;">Institutional quality monitoring</span></div>
+      <div class="callout amber" style="text-align:center;"><strong>Enterprise</strong><br><span style="font-size:11px;">Adaptable to customer / employee feedback</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SLIDE 20 — THANK YOU                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" style="text-align:center;">
+  <div class="slide-header" style="justify-content:center;">
+    <div style="text-align:center;">
+      <div class="slide-num" style="text-align:center; margin-bottom:4px;">Slide 20</div>
+      <h2>Thank You</h2>
+    </div>
+  </div>
+  <div class="slide-body" style="padding:48px 40px;">
+    <p style="font-size:28px; font-weight:800; color:var(--navy); margin-bottom:8px;">Student Feedback Intelligence System</p>
+    <p style="color:var(--grey-text); font-size:15px; margin-bottom:40px;">Edge-Based NLP for Automated Student Feedback Analysis</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:500px; margin:0 auto 40px;">
+      <div class="callout" style="text-align:left;"><strong>Tech Stack</strong><br><span style="font-size:11px;">React 18 · TypeScript · Tailwind CSS · Edge NLP · Recharts</span></div>
+      <div class="callout" style="text-align:left;"><strong>Live Demo</strong><br><span style="font-size:11px;">http://localhost:5173/</span></div>
+      <div class="callout" style="text-align:left;"><strong>Presented By</strong><br><span style="font-size:11px;">[Your Name / Team Name]</span></div>
+      <div class="callout" style="text-align:left;"><strong>Institution</strong><br><span style="font-size:11px;">[Your College / University]</span></div>
+    </div>
+
+    <p style="font-size:22px; font-weight:700; color:var(--navy);">Questions & Discussion</p>
+    <p style="color:var(--grey-text);">We welcome questions about the NLP pipeline, architecture decisions, edge AI design, or UI implementation.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  APPENDIX BANNER                                -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="appendix-banner">
+  <h2>Appendix — Technical Reference</h2>
+  <p>Backup slides for detailed examiner questions. Present only when asked.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  APPENDIX A — NLP SCORING DETAIL                -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header" style="background:#374151;">
+    <div>
+      <div class="slide-num">Appendix A</div>
+      <h2>NLP Category Scoring — Technical Detail</h2>
+    </div>
+    <div class="section-tag" style="background:rgba(255,255,255,0.1);">Technical</div>
+  </div>
+  <div class="slide-body">
+    <h3>Algorithm</h3>
+    <p>Each feedback text is scored against 8 keyword dictionaries. Each keyword has a weight reflecting its discriminative power for that category.</p>
+
+    <div class="code-block">
+// For each category C:<br>
+score[C] = Σ (keyword_weight × tf(keyword, text))<br>
+           for all keywords in dictionary[C]<br><br>
+predicted_category = argmax(score)<br><br>
+// Minimum confidence threshold prevents forced assignment<br>
+if max(score) &lt; THRESHOLD:<br>
+&nbsp;&nbsp;predicted_category = "General / Uncategorized"
+    </div>
+
+    <h3>Keyword Dictionary Example — Hostel Category</h3>
+    <table>
+      <thead><tr><th>Keyword</th><th>Weight</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr><td>hostel</td><td>3.0</td><td>Direct category indicator</td></tr>
+        <tr><td>water supply</td><td>2.5</td><td>Common hostel complaint</td></tr>
+        <tr><td>mess food</td><td>2.5</td><td>Common hostel complaint</td></tr>
+        <tr><td>warden</td><td>2.0</td><td>Hostel-specific role</td></tr>
+        <tr><td>room</td><td>1.5</td><td>Shared with other categories</td></tr>
+        <tr><td>maintenance</td><td>1.5</td><td>Shared with Infrastructure</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  APPENDIX B — PRIORITY HEURISTICS DETAIL        -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header" style="background:#374151;">
+    <div>
+      <div class="slide-num">Appendix B</div>
+      <h2>Priority Heuristics — Technical Detail</h2>
+    </div>
+    <div class="section-tag" style="background:rgba(255,255,255,0.1);">Technical</div>
+  </div>
+  <div class="slide-body">
+    <h3>Two-Pass Priority System</h3>
+
+    <h3>Pass 1 — Safety Override Keywords</h3>
+    <p>If any of the following tokens are detected, priority is immediately set to <span class="badge badge-critical">Critical</span> regardless of other scores:</p>
+    <div class="callout red">
+      sparking · electrical fire · short circuit · dangerous · hazardous · injury · food poisoning · gas leak · flooding · structural damage · threat · assault · emergency
+    </div>
+
+    <h3>Pass 2 — Urgency Scoring</h3>
+    <table>
+      <thead><tr><th>Signal Type</th><th>Examples</th><th>Score Contribution</th></tr></thead>
+      <tbody>
+        <tr><td>Time duration words</td><td>days, weeks, since, still, continuing</td><td>+2 per match</td></tr>
+        <tr><td>Urgency amplifiers</td><td>urgent, immediate, asap, critical</td><td>+3 per match</td></tr>
+        <tr><td>Unresolved complaint signals</td><td>no response, ignored, not fixed, pending</td><td>+2 per match</td></tr>
+        <tr><td>Severity amplifiers</td><td>completely, totally, never, always broken</td><td>+1 per match</td></tr>
+        <tr><td>Basic necessity absence</td><td>water, power, internet unavailable</td><td>+2 per match</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Score ≥ 6 → High | Score 3–5 → Medium | Score &lt; 3 → Low</strong></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  APPENDIX C — DATA FLOW                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header" style="background:#374151;">
+    <div>
+      <div class="slide-num">Appendix C</div>
+      <h2>Data Flow & File Structure</h2>
+    </div>
+    <div class="section-tag" style="background:rgba(255,255,255,0.1);">Technical</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>Data Flow</h3>
+        <div class="flow-box">Student submits text via form</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">storageService.submitFeedback()</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">nlpEngine.analyzeFeedbackText()</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">FeedbackAnalysis object returned (~12ms)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Merged into FeedbackItem → LocalStorage</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Explorer · Dashboard · Analytics read from storage</div>
+      </div>
+      <div>
+        <h3>Source File Structure</h3>
+        <div class="code-block">
+src/<br>
+├── pages/          (10 page components)<br>
+├── components/<br>
+│   ├── common/     (Badges, etc.)<br>
+│   ├── layout/     (Sidebar, Header)<br>
+│   └── explorer/   (FeedbackDetailDrawer)<br>
+├── services/<br>
+│   ├── nlpEngine.ts<br>
+│   └── storageService.ts<br>
+├── data/<br>
+│   ├── mockFeedback.ts    (30 records)<br>
+│   └── evaluationData.ts  (metrics)<br>
+├── types/index.ts<br>
+├── App.tsx<br>
+└── main.tsx
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
